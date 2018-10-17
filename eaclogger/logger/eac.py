@@ -1,13 +1,8 @@
 import time
 import hashlib
 
-# whipper now uses 'whipper' as module name
-try:
-    from morituri.common import common
-    from morituri.result import result
-except ImportError:
-    from whipper.common import common
-    from whipper.result import result
+from morituri.common import common
+from morituri.result import result
 
 
 class EacLogger(result.Logger):
@@ -56,23 +51,14 @@ class EacLogger(result.Logger):
 
         # Ripper version
         # ATM differs from EAC's typical log line
-        isWhipper = False
-        try:
-            from morituri.configure import configure
-            lines.append("morituri version %s" % configure.version)
-        except ImportError:
-            import whipper
-            lines.append("whipper version %s" % whipper.__version__)
-            isWhipper = True
+        from morituri.configure import configure
+        lines.append("morituri version %s (eac logger)" % configure.version)
         lines.append("")
 
         # Rip date
         # ATM differs from EAC's typical log line
-        date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(epoch)).strip()
-        if isWhipper:
-            lines.append("whipper extraction logfile from %s" % date)
-        else:
-            lines.append("morituri extraction logfile from %s" % date)
+        date = time.strftime("%d. %B %Y, %R", time.gmtime(epoch)).strip()
+        lines.append("morituri extraction logfile from %s" % date)
         lines.append("")
 
         # Artist / Album
@@ -114,33 +100,19 @@ class EacLogger(result.Logger):
                      "Appended to previous track")
         lines.append("")
 
-        # Recent whipper versions do not behave like morituri ones
         # Missing lines (unneeded?): "Selected bitrate", "Quality"
-        try:
-            # ATM differs from EAC's typical log line
-            lines.append("Used output format       : %s" %
-                         ripResult.profileName)
-            # Extra lines (not included in EAC's logfiles)
-            lines.append("GStreamer pipeline       : %s" %
-                         ripResult.profilePipeline)
-            lines.append("GStreamer version        : %s" %
-                         ripResult.gstreamerVersion)
-            lines.append("GStreamer Python version : %s" %
-                         ripResult.gstPythonVersion)
-            lines.append("Encoder plugin version   : %s" %
-                         ripResult.encoderVersion)
-        except AttributeError:
-            lines.append("Used output format              : FLAC")
-            lines.append("Add ID3 tag                     : No")
-            # Handle the case in which the distutils module isn't available
-            try:
-                from distutils.spawn import find_executable
-                flacPath = find_executable('flac')
-            except ImportError:
-                flacPath = "Unknown"
-            lines.append("Command line compressor         : %s" % flacPath)
-            lines.append("Additional command line options : "
-                         "--silent --verify -o %%d -f %%s")
+        # ATM differs from EAC's typical log line
+        lines.append("Used output format       : %s" %
+                     ripResult.profileName)
+        # Extra lines (not included in EAC's logfiles)
+        lines.append("GStreamer pipeline       : %s" %
+                     ripResult.profilePipeline)
+        lines.append("GStreamer version        : %s" %
+                     ripResult.gstreamerVersion)
+        lines.append("GStreamer Python version : %s" %
+                     ripResult.gstPythonVersion)
+        lines.append("Encoder plugin version   : %s" %
+                     ripResult.encoderVersion)
         lines.append("")
         lines.append("")
 
@@ -173,8 +145,6 @@ class EacLogger(result.Logger):
 
         # For every track include information in the TOC
         for t in table.tracks:
-            # FIXME: what happens to a track start over 60 minutes ?
-            # Answer: tested empirically, everything seems OK
             start = t.getIndex(1).absolute
             length = table.getTrackLength(t.number)
             end = table.getTrackEnd(t.number)
@@ -295,7 +265,7 @@ class EacLogger(result.Logger):
             lines.append("     Copy CRC %08X" % trackResult.copycrc)
 
         # AccurateRip track status
-        # No support for AccurateRip V2 until whipper 0.5.1
+        # No support for AccurateRip v2 in morituri
         if trackResult.accurip:
             self._inARDatabase += 1
             if trackResult.ARCRC == trackResult.ARDBCRC:
