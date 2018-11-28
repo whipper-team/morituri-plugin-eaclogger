@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="morituri-plugin-eaclogger",
-    version="0.3.0",
+    version="0.3.1",
     description="""morituri EAC-style logger""",
     author="superveloman",
     maintainer="JoeLametta",

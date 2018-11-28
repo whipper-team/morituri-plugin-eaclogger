@@ -52,7 +52,8 @@ class EacLogger(result.Logger):
         # Ripper version
         # ATM differs from EAC's typical log line
         from morituri.configure import configure
-        lines.append("morituri version %s (eac logger)" % configure.version)
+        lines.append("morituri version %s (eac logger 0.3.1)" %
+                     configure.version)
         lines.append("")
 
         # Rip date
@@ -77,11 +78,9 @@ class EacLogger(result.Logger):
         # Extra line (not included in EAC's logfiles)
         lines.append("Use cdparanoia mode     : Yes (cdparanoia %s)" % (
             ripResult.cdparanoiaVersion))
-        defeat = "Unknown"
-        if ripResult.cdparanoiaDefeatsCache is True:
+        defeat = "No"
+        if ripResult.cdparanoiaDefeatsCache:
             defeat = "Yes"
-        if ripResult.cdparanoiaDefeatsCache is False:
-            defeat = "No"
         lines.append("Defeat audio cache      : %s" % defeat)
         lines.append("Make use of C2 pointers : No")
         lines.append("")
@@ -165,6 +164,7 @@ class EacLogger(result.Logger):
             lines.append('')
 
         # AccurateRip summary at the end of the logfile
+        lines.append("")
         if self._inARDatabase == 0:
             lines.append("None of the tracks are present "
                          "in the AccurateRip database")
@@ -189,7 +189,8 @@ class EacLogger(result.Logger):
                 lines.append("All tracks accurately ripped")
         lines.append("")
 
-        # FIXME: ATM this will always pick else (when does EAC report errors?)
+        # FIXME: ATM this will always pick else
+        # When does EAC report errors? (only on abort?)
         if self._errors:
             lines.append("There were errors")
         else:
@@ -204,6 +205,7 @@ class EacLogger(result.Logger):
 
         # Log checksum (uppercase hex encoded SHA256 hash of all lines)
         # It isn't compatible with EAC's one: checklog fail
+        lines.append("")
         hasher = hashlib.sha256()
         hasher.update("\n".join(lines).encode("utf-8"))
         lines.append("==== Log checksum %s ====" % hasher.hexdigest().upper())
@@ -217,10 +219,7 @@ class EacLogger(result.Logger):
         lines = []
 
         # Track number (formatting like EAC's one)
-        if trackResult.number < 10:
-            lines.append("Track  %2d" % trackResult.number)
-        else:
-            lines.append("Track %2d" % trackResult.number)
+        lines.append("Track %2d" % trackResult.number)
         lines.append("")
 
         # Filename (including path) of ripped track
@@ -283,7 +282,7 @@ class EacLogger(result.Logger):
         else:
             lines.append("     Track not present in AccurateRip database")
 
-        # EAC emits 0 warnings even when a CRC mismatch occurs
+        # EAC emits zero warnings even when a CRC mismatch occurs
         if trackResult.testcrc == trackResult.copycrc:
             lines.append("     Copy OK")
         return lines
