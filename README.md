@@ -26,7 +26,7 @@ To use this plugin:
 * build it:
 
     ```bash
-    git clone https://travis-ci.com/whipper-team/morituri-plugin-eaclogger.git
+    git clone https://github.com/whipper-team/morituri-plugin-eaclogger.git
     cd morituri-plugin-eaclogger
     python2 setup.py bdist_egg
     ```
