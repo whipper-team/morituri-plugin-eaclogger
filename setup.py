@@ -4,7 +4,7 @@ from eaclogger import __version__ as plugin_version
 setup(
     name="morituri-plugin-eaclogger",
     version=plugin_version,
-    description="""A plugin for morituri which provides EAC style log reports""",
+    description="""A plugin for morituri which provides EAC style log reports""",  # noqa: E501
     author="supermanvelo",
     maintainer="JoeLametta",
     license="ISC License",

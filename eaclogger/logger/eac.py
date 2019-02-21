@@ -1,6 +1,6 @@
+import eaclogger
 import time
 import hashlib
-
 from morituri.common import common
 from morituri.result import result
 
@@ -52,8 +52,8 @@ class EacLogger(result.Logger):
         # Ripper version
         # ATM differs from EAC's typical log line
         from morituri.configure import configure
-        lines.append("morituri version %s (eac logger 0.3.1)" %
-                     configure.version)
+        lines.append("morituri version %s (eac logger %s)" % (
+                     configure.version, eaclogger.__version__))
         lines.append("")
 
         # Rip date
