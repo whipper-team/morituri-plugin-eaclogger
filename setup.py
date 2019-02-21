@@ -1,15 +1,18 @@
 from setuptools import setup
+from eaclogger import __version__ as plugin_version
 
 setup(
     name="morituri-plugin-eaclogger",
-    version="0.3.1",
-    description="""morituri EAC-style logger""",
-    author="superveloman",
+    version=plugin_version,
+    description="""A plugin for morituri which provides EAC style log reports""",
+    author="supermanvelo",
     maintainer="JoeLametta",
-    packages=[
-        'eaclogger',
-        'eaclogger.logger'],
-    entry_points="""
-  [morituri.logger]
-  eac = eaclogger.logger.eac:EacLogger
-  """)
+    license="ISC License",
+    url="https://github.com/whipper-team/morituri-plugin-eaclogger",
+    packages=['eaclogger', 'eaclogger.logger'],
+    entry_points={
+        "morituri.logger": [
+            "eac = eaclogger.logger.eac:EacLogger"
+        ]
+    }
+)

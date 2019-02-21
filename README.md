@@ -1,12 +1,23 @@
 ## Status
 
+[![License](https://img.shields.io/github/license/whipper-team/morituri-plugin-eaclogger.svg)](https://github.com/whipper-team/morituri-plugin-eaclogger/blob/master/LICENSE)
 [![Build Status](https://travis-ci.com/whipper-team/morituri-plugin-eaclogger.svg?branch=master)](https://travis-ci.com/whipper-team/morituri-plugin-eaclogger)
+[![GitHub (pre-)release](https://img.shields.io/github/release/whipper-team/morituri-plugin-eaclogger/all.svg)](https://github.com/whipper-team/morituri-plugin-eaclogger/releases/latest)
 
 ## Logger information
 
-This logger provides text reports structured in a way that carefully mimics EAC's generated ones. It is compatible only with morituri.
+This logger plugin for morituri provides text reports structured in a way that
+carefully mimics EAC's generated ones (except for the checksum).
 
-Eaclogger should be feature complete so future development will consist only of bugfixes.
+The logger should be feature complete so future development will consist
+mainly of bugfixes.
+
+If you're looking for the analogous [whipper](https://github.com/whipper-team/whipper) plugin,
+it can be found [here](https://github.com/whipper-team/whipper-plugin-eaclogger).
+
+## License
+
+Licensed under the [ISC license](https://github.com/whipper-team/morituri-plugin-eaclogger/blob/master/LICENSE).
 
 ## Instructions
 
@@ -23,8 +34,8 @@ To use this plugin:
 * copy it to your plugin directory:
 
     ```bash
-    mkdir -p $HOME/.morituri/plugins
-    cp dist/morituri_*egg $HOME/.morituri/plugins
+    mkdir -p "$HOME/.morituri/plugins"
+    cp dist/morituri_*egg "$HOME/.morituri/plugins"
     ```
 
 * verify that it gets recognized:
