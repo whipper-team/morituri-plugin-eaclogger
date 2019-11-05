@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.com/whipper-team/morituri-plugin-eaclogger.svg?branch=master)](https://travis-ci.com/whipper-team/morituri-plugin-eaclogger)
 [![GitHub (pre-)release](https://img.shields.io/github/release/whipper-team/morituri-plugin-eaclogger/all.svg)](https://github.com/whipper-team/morituri-plugin-eaclogger/releases/latest)
 
+**NOTICE: UNMAINTAINED**
+
 ## Logger information
 
 This logger plugin for morituri provides text reports structured in a way that
