@@ -14,7 +14,7 @@ carefully mimics EAC's generated ones (except for the checksum).
 The logger should be feature complete so future development will consist
 mainly of bugfixes.
 
-If you're looking for the analogous [whipper](https://github.com/whipper-team/whipper) plugin,
+If you're looking for the analogous (legacy) [whipper](https://github.com/whipper-team/whipper) plugin,
 it can be found [here](https://github.com/whipper-team/whipper-plugin-eaclogger).
 
 ## License
